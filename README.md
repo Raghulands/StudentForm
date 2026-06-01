@@ -1,0 +1,1 @@
+A simple Student Registration Form built with HTML, CSS, and JavaScript. Users can enter student details, save records dynamically to a table, and delete entries instantly. This project demonstrates form handling, DOM manipulation, event handling, validation, and dynamic table updates without using any frameworks or databases.
