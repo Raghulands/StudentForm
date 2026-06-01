@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Form</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, sans-serif;
+    }
+
+    body{
+        background:#f5f5f5;
+        padding:30px;
+    }
+
+    h1{
+        text-align:center;
+        margin-bottom:20px;
+    }
+
+    .container{
+        width:420px;
+        margin:auto;
+        background:white;
+        border:2px solid #ccc;
+        padding:15px;
+    }
+
+    table.form-table{
+        width:100%;
+        border-collapse:collapse;
+    }
+
+    .form-table td{
+        border:1px solid #ccc;
+        padding:10px;
+    }
+
+    .form-table input,
+    .form-table select{
+        width:100%;
+        padding:6px;
+    }
+
+    .gender-box{
+        display:flex;
+        gap:15px;
+    }
+
+    .gender-box label{
+        display:flex;
+        align-items:center;
+        gap:5px;
+    }
+
+    .save-btn{
+        width:100%;
+        padding:10px;
+        background:#7fffd4;
+        border:none;
+        cursor:pointer;
+        font-size:16px;
+        font-weight:bold;
+    }
+
+    .save-btn:hover{
+        background:#66e6bf;
+    }
+
+    .student-table{
+        width:80%;
+        margin:30px auto;
+        border-collapse:collapse;
+        background:white;
+    }
+
+    .student-table th,
+    .student-table td{
+        border:1px solid #ccc;
+        padding:10px;
+        text-align:center;
+    }
+
+    .student-table th{
+        background:#f0f0f0;
+    }
+
+    .delete-btn{
+        background:red;
+        color:white;
+        border:none;
+        padding:8px 12px;
+        cursor:pointer;
+        border-radius:3px;
+    }
+
+    .delete-btn:hover{
+        background:darkred;
+    }
+</style>
+</head>
+<body>
+
+<h1>STUDENT FORM</h1>
+
+<div class="container">
+    <table class="form-table">
+        <tr>
+            <td><b>Name</b></td>
+            <td><input type="text" id="name"></td>
+        </tr>
+
+        <tr>
+            <td><b>Age</b></td>
+            <td><input type="number" id="age"></td>
+        </tr>
+
+        <tr>
+            <td><b>Gender</b></td>
+            <td>
+                <div class="gender-box">
+                    <label>
+                        <input type="radio" name="gender" value="Male" checked>
+                        Male
+                    </label>
+
+                    <label>
+                        <input type="radio" name="gender" value="Female">
+                        Female
+                    </label>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>Course</b></td>
+            <td>
+                <select id="course">
+                    <option>JavaScript</option>
+                    <option>Python</option>
+                    <option>Java</option>
+                    <option>C++</option>
+                    <option>React</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>Email</b></td>
+            <td><input type="email" id="email"></td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <button class="save-btn" onclick="saveStudent()">
+                    Save
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<table class="student-table">
+    <thead>
+        <tr>
+            <th>NAME</th>
+            <th>AGE</th>
+            <th>COURSE</th>
+            <th>GENDER</th>
+            <th>EMAIL</th>
+            <th>ACTION</th>
+        </tr>
+    </thead>
+
+    <tbody id="studentBody">
+    </tbody>
+</table>
+
+<script>
+function saveStudent() {
+
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+    let course = document.getElementById("course").value;
+    let email = document.getElementById("email").value;
+
+    let gender = document.querySelector(
+        'input[name="gender"]:checked'
+    ).value;
+
+    if(name === "" || age === "" || email === ""){
+        alert("Please fill all fields");
+        return;
+    }
+
+    let row = document.createElement("tr");
+
+    row.innerHTML = `
+        <td>${name}</td>
+        <td>${age}</td>
+        <td>${course}</td>
+        <td>${gender}</td>
+        <td>${email}</td>
+        <td>
+            <button class="delete-btn" onclick="deleteRow(this)">
+                Delete
+            </button>
+        </td>
+    `;
+
+    document.getElementById("studentBody").appendChild(row);
+
+    document.getElementById("name").value = "";
+    document.getElementById("age").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("course").selectedIndex = 0;
+}
+
+function deleteRow(button){
+    button.parentElement.parentElement.remove();
+}
+</script>
+
+</body>
+</html>
